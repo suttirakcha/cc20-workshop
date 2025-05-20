@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import ProductCard from './ProductCard'
 
-function ProductList({ products, addToCart }) {
+function ProductList({ products, addToCart, className }) {
   return (
-    <div className='w-2/3 ps-2'>
+    <div className={`ps-2 ${className}`}>
       <h2 className='text-2xl rounded py-2 text-slate-600'>Product List</h2>
       <div className='flex flex-wrap gap-3'>
         {products.map(product => (

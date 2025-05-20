@@ -6,6 +6,7 @@ import ProductList from "./components/ProductList"
 function App() {
   const [products, setProducts] = useState([]);
   const [cartItems, setCartItems] = useState([]);
+  const [isCartShowing, setIsCartShowing] = useState(true);
 
   // Cart => { id, price, title, quantity }
 
@@ -42,17 +43,31 @@ function App() {
     setCartItems(clonedCart);
   }
 
+  const removeFromCart = (id) => {
+    let idx = cartItems.findIndex(item => item.id === id);
+    const clonedCart = [...cartItems];
+    clonedCart.splice(idx, 1)
+    setCartItems(clonedCart);
+  }
+
   return (
     <div className="min-h-screen flex flex-col">
-      <Header itemCount={cartItems.length} />
+      <Header 
+        itemCount={cartItems.length} 
+        isCartShowing={isCartShowing} 
+        setIsCartShowing={setIsCartShowing}
+      />
       <div className="flex flex-1 bg-orange-100 relative">
         <ProductList 
           products={products} 
           addToCart={addToCart}
+          className={`${isCartShowing ? 'w-2/3' : 'w-full'}`}
         />
         <CartSummary items={cartItems} 
           onDecrease={decreaseCartQuantity}
+          onRemove={removeFromCart}
           addToCart={addToCart}
+          isShowing={isCartShowing}
         />
       </div>
     </div>
