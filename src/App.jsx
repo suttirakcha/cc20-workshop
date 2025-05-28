@@ -11,7 +11,7 @@ function App() {
   // Cart => { id, price, title, quantity }
 
   const fetchProducts = () => {
-    fetch("http://localhost:8000/products")
+    fetch("./database/products.json")
       .then(res => res.json())
       .then(data => setProducts(data))
   }
